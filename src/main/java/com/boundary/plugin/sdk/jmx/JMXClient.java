@@ -178,7 +178,7 @@ public class JMXClient {
 		boolean connected = false;
 
 		try {
-			Map<String, String[]> env = new HashMap<>();
+			Map<String, String[]> env = new HashMap<String,String[]>();
 			String[] credentials = { user, password };
 			env.put(JMXConnector.CREDENTIALS, credentials);
 			getMBeanServerConnection(this.getRMIUrl(host, port), env);
