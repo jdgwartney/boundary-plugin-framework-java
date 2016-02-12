@@ -47,6 +47,7 @@ public class MBeansTransformer<E> {
 		MBeanServerConnection connection = this.client.getMBeanServerConnection();
 		MBeanInfo info;
 		HashSet<String> checkTypes = new HashSet<String>();
+		checkTypes.add("double");
 		checkTypes.add("long");
 		checkTypes.add("int");
 		checkTypes.add("javax.management.openmbean.CompositeData");
