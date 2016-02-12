@@ -15,41 +15,47 @@
 package com.boundary.plugin.sdk.examples;
 
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
 import com.boundary.plugin.sdk.MeasurementSink;
 import com.boundary.plugin.sdk.MeasurementSinkStandardOut;
+import com.boundary.plugin.sdk.EventSink;
+import com.boundary.plugin.sdk.EventSinkStandardOutput;
 import com.boundary.plugin.sdk.Plugin;
 import com.boundary.plugin.sdk.CollectorDispatcher;
 import com.boundary.plugin.sdk.PluginRunner;
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import com.google.gson.JsonParseException;
 
 public class SimplePlugin implements Plugin<SimplePluginConfiguration> {
 
 	SimplePluginConfiguration configuration;
 	CollectorDispatcher dispatcher;
 	MeasurementSink output;
+    EventSink eventOutput;
 
 	@Override
 	public void setConfiguration(SimplePluginConfiguration configuration) {
 		this.configuration = configuration;
 		this.output = new MeasurementSinkStandardOut();
+        this.eventOutput = new EventSinkStandardOutput();
 		output.getClass();
 	}
+
+    @Override
+    public void setEventOutput(final EventSink output) {
+        this.eventOutput = output;
+    }
 	
 	@Override
 	public void loadConfiguration() {
-		ObjectMapper mapper = new ObjectMapper();
+		Gson gson = new Gson();
 		try {
-			SimplePluginConfiguration configuration = mapper.readValue(new File("param.json"), SimplePluginConfiguration.class);
+			SimplePluginConfiguration configuration = gson.fromJson(new FileReader("param.json"), SimplePluginConfiguration.class);
 			setConfiguration(configuration);
 		} catch (JsonParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (JsonMappingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {

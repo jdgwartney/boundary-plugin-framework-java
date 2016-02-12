@@ -1,4 +1,4 @@
-// Copyright 2014-2015 Boundary, Inc.
+// Copyright 2015 BMC Software, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -11,24 +11,22 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-package com.boundary.sdk.plugin;
 
-import java.util.List;
+package com.boundary.plugin.sdk;
 
-public class Metrics {
-	
-	List<String> metrics;
-	
-	public Metrics() {
-		
-	}
+import com.boundary.plugin.sdk.EventSink;
+import com.boundary.plugin.sdk.EventFormatter;
 
-	public List<String> getMetrics() {
-		return metrics;
-	}
+public class EventSinkStandardOutput implements EventSink {
 
-	public void setMetrics(List<String> metrics) {
-		this.metrics = metrics;
-	}
-	
+    private EventFormatter formatter;
+
+    public EventSinkStandardOutput () {
+        formatter = new EventFormatter();
+    }
+
+    public void emit(Event event) {
+        System.out.println(formatter.format(event));
+    }
+
 }
