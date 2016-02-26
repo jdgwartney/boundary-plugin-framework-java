@@ -16,7 +16,7 @@ package com.boundary.plugin.sdk.jmx;
 
 public class MBeanAttribute {
 	
-	public enum MetricType {standard};
+	public enum MetricType {standard}
 	
 	private String attribute;
 	private String dataType;
