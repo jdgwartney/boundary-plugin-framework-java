@@ -69,7 +69,12 @@ public class PluginUtilTest {
 	public void testMulipleSpace() {
 		assertEquals("Check MultipleSpace","PS_SURVIVOR_SPACE",PluginUtil.toUpperUnderscore("PS Survivor Space",'_'));
 	}
-	
+
+	@Test
+	public void testUpperSpaceMixedCase() {
+		assertEquals("Check MultipleSpace", "PS_MARK_SWEEP", PluginUtil.toUpperUnderscore("PS MarkSweep", '_'));
+	}
+
 	@Test
 	public void testCamelCaseToSpace() {
 		assertEquals("Check MultipleSpace","Collection Usage Threshold",PluginUtil.camelCaseToSpaceSeparated("CollectionUsageThreshold"));
